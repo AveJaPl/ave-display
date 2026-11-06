@@ -4,7 +4,7 @@ Wersalikowy krój wystawowy (display) do nagłówków. Zbudowany od zera na lite
 litera R w foncie to wektor `reference/R-z-monogramu.svg` przeskalowany do metryk fontu, a pozostałe
 znaki powstały z tych samych reguł. Dzięki temu logo, ikona i nagłówki na stronie są jednym krojem.
 
-![REDLINE RENT złożone krojem Ave Display](preview/redline-rent.png)
+![AveJa, Filip Piątek, złożone krojem Ave Display](preview/banner.png)
 
 - rodzina **Ave Display**, styl **Regular**: jedna grubość, krój jest pochylony sam z siebie,
 - tylko wersaliki; małe litery wskazują na te same glify, więc `redline rent` wyświetli się jako `REDLINE RENT`,
@@ -17,7 +17,7 @@ znaki powstały z tych samych reguł. Dzięki temu logo, ikona i nagłówki na s
 | `dist/AveDisplay-Regular.woff2` | font na stronę (ok. 3 KB) |
 | `dist/AveDisplay-Regular.ttf` | ten sam font do instalacji w systemie lub w programach graficznych |
 | `specimen.html` | strona prezentacyjna: nagłówki w 140/72/32/16 px, siatka znaków, porównanie ze wzorcem |
-| `preview/specimen.png`, `preview/redline-rent.png` | podglądy wyrenderowane przez Chrome bez okna |
+| `preview/specimen.png`, `preview/banner.png` | podglądy wyrenderowane przez Chrome bez okna |
 | `src/ave_display/` | kod kroju: parametry, geometria, glify, odstępy, składanie fontu |
 | `scripts/verify.py` | testy fontu |
 | `scripts/preview.py` | render podglądów PNG |

@@ -2,7 +2,7 @@
 """Renderuje podglądy PNG przez Chrome bez okna (headless).
 
 preview/specimen.png      - cały specimen.html
-preview/redline-rent.png  - sam napis REDLINE RENT w dużym rozmiarze
+preview/banner.png        - napis AVEJA i podpis Filip Piątek w dużym rozmiarze
 """
 
 from __future__ import annotations
@@ -19,13 +19,14 @@ ROOT = Path(__file__).resolve().parent.parent
 BACKGROUND = (7, 7, 8)
 
 BANNER = """<!doctype html>
-<html lang="pl"><head><meta charset="utf-8"><title>REDLINE RENT</title>
+<html lang="pl"><head><meta charset="utf-8"><title>AveJa</title>
 <style>
 @font-face { font-family: "Ave Display"; src: url("../dist/AveDisplay-Regular.woff2") format("woff2"); font-display: block; }
 html, body { margin: 0; height: 100%; background: #070708; }
-body { display: grid; place-items: center; }
-div { font-family: "Ave Display"; font-size: 210px; color: #fff; white-space: nowrap; line-height: 1; }
-</style></head><body><div>REDLINE RENT</div></body></html>
+body { display: grid; place-content: center; text-align: center; font-family: "Ave Display"; line-height: 1; }
+h1 { margin: 0; font-size: 230px; font-weight: 400; color: #fff; }
+p { margin: 36px 0 0; font-size: 60px; color: #9ba3ab; letter-spacing: 0.06em; }
+</style></head><body><h1>AveJa</h1><p>Filip Piątek</p></body></html>
 """
 
 
@@ -63,10 +64,10 @@ def render_all(root: Path = ROOT) -> None:
     screenshot(root / "specimen.html", specimen_png, 1600, 9000)
     trim_bottom(specimen_png, margin=56)
 
-    banner_html = preview / "redline-rent.html"
+    banner_html = preview / "banner.html"
     banner_html.write_text(BANNER, encoding="utf-8")
-    screenshot(banner_html, preview / "redline-rent.png", 2400, 600)
-    print(f"podglądy: {specimen_png.relative_to(root)}, {(preview / 'redline-rent.png').relative_to(root)}")
+    screenshot(banner_html, preview / "banner.png", 2400, 760)
+    print(f"podglądy: {specimen_png.relative_to(root)}, {(preview / 'banner.png').relative_to(root)}")
 
 
 if __name__ == "__main__":
