@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ave Display - specimen</title>
+<style>
+  @font-face {
+    font-family: "Ave Display";
+    src: url("dist/AveDisplay-Regular.woff2") format("woff2"),
+         url("dist/AveDisplay-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: block;
+  }
+
+  :root {
+    --bg: #070708;
+    --fg: #ffffff;
+    --muted: #8a8a93;
+    --line: #1d1d22;
+    --accent: #e10600;
+    --ui: "Geist", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "Geist Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--ui);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  main { max-width: 1600px; margin: 0 auto; padding: 56px 40px 72px; }
+
+  .display { font-family: "Ave Display", sans-serif; font-weight: 400; line-height: 1.12; }
+
+  header { display: grid; gap: 20px; padding-bottom: 40px; border-bottom: 1px solid var(--line); }
+  header .display { font-size: 140px; }
+  .meta { display: flex; flex-wrap: wrap; gap: 10px 28px; color: var(--muted); font-size: 15px; }
+  .meta b { color: var(--fg); font-weight: 600; }
+
+  section { padding: 44px 0 8px; border-bottom: 1px solid var(--line); }
+  h2 {
+    margin: 0 0 28px;
+    font: 600 13px/1 var(--mono);
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .size { display: grid; gap: 14px; padding: 0 0 40px; }
+  .size > span { font: 500 13px/1.6 var(--mono); color: var(--muted); }
+  .size .display { display: grid; gap: .18em; }
+  .s140 { font-size: 140px; }
+  .s72 { font-size: 72px; }
+  .s32 { font-size: 32px; }
+  .s16 { font-size: 16px; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+    margin-bottom: 36px;
+  }
+  .cell {
+    display: grid;
+    grid-template-rows: 112px auto;
+    place-items: center;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 6px 4px 10px;
+  }
+  .cell .display { font-size: 64px; line-height: 1; }
+  .cell small { font: 11px/1.3 var(--mono); color: var(--muted); }
+
+  .note { color: var(--muted); font-size: 15px; line-height: 1.6; margin: 0 0 36px; max-width: 900px; }
+  .note code { font-family: var(--mono); color: var(--fg); }
+
+  .compare { display: grid; gap: 18px; padding-bottom: 36px; }
+  .compare figure { margin: 0; display: grid; gap: 10px; }
+  .compare figcaption { font: 12px/1.4 var(--mono); color: var(--muted); }
+  .compare img.wzor { width: 1100px; max-width: 100%; display: block; }
+  .compare .display { font-size: 106px; }
+  .rr { display: flex; align-items: flex-end; gap: 72px; }
+  .rr img { height: 140px; filter: invert(1); }
+  .rr .display { font-size: 200px; line-height: .8; }
+
+  pre {
+    margin: 0 0 36px;
+    padding: 22px 24px;
+    background: #0e0e11;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    color: #d6d6dc;
+    font: 13px/1.6 var(--mono);
+    overflow-x: auto;
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="display">AVE DISPLAY</div>
+    <div class="meta">
+      <span><b>Ave Display Regular</b></span>
+      <span>krój wystawowy, wyłącznie wersaliki</span>
+      <span>pochylenie 28°</span>
+      <span>wersaliki 700 / 1000 j.</span>
+      <span>projekt: Filip Piątek (AveJa)</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>Nagłówki: 140 / 72 / 32 / 16 px</h2>
+    <div class="size"><span>140 px</span><div class="display s140" data-headlines></div></div>
+    <div class="size"><span>72 px</span><div class="display s72" data-headlines></div></div>
+    <div class="size"><span>32 px</span><div class="display s32" data-headlines></div></div>
+    <div class="size"><span>16 px</span><div class="display s16" data-headlines></div></div>
+  </section>
+
+  <section>
+    <h2>Zestaw znaków</h2>
+    <div class="grid" id="grid"></div>
+    <p class="note">Małe litery (a-z, ą ć ę ł ń ó ś ź ż) wskazują w tablicy <code>cmap</code> na te same glify
+      co wersaliki, więc tekst wpisany małymi literami wyświetli się wersalikami:</p>
+    <div class="size"><span>48 px</span><div class="display" style="font-size:48px">zażółć gęślą jaźń - redline rent</div></div>
+  </section>
+
+  <section>
+    <h2>Porównanie ze wzorcem</h2>
+    <div class="compare">
+      <figure>
+        <img class="wzor" src="reference/napis-wzor-1.png" alt="Napis wzorcowy REDLINE RENT">
+        <figcaption>reference/napis-wzor-1.png: napis wzorcowy (generator obrazów)</figcaption>
+      </figure>
+      <figure>
+        <div class="display">REDLINE RENT</div>
+        <figcaption>Ave Display, ta sama wysokość wersalików, odstępy celowo luźniejsze niż we wzorcu</figcaption>
+      </figure>
+      <figure>
+        <div class="rr">
+          <img src="reference/R-z-monogramu.svg" alt="R z monogramu">
+          <div class="display">R</div>
+          <div class="display">RR</div>
+        </div>
+        <figcaption>R z monogramu (wektor wzorcowy) · R z fontu · RR złożone z fontu</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>Kerning</h2>
+    <div class="size"><span>72 px</span><div class="display s72">VA WA YA TA PA LT LY RV 7. T. &quot;A&quot;</div></div>
+  </section>
+
+  <section>
+    <h2>Użycie na stronie</h2>
+<pre>@font-face {
+  font-family: "Ave Display";
+  src: url("/fonts/AveDisplay-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* krój ma jedną grubość: bez font-weight 400 i font-synthesis: none
+   przeglądarka dorobi nagłówkom sztuczne pogrubienie */
+h1, h2, h3 {
+  font-family: "Ave Display", sans-serif;
+  font-weight: 400;
+  font-synthesis: none;
+}
+p { font-family: "Geist", sans-serif; }</pre>
+  </section>
+</main>
+
+<script>
+  const HEADLINES = [
+    "REDLINE RENT",
+    "WYBIERZ MASZYNĘ",
+    "DAJ SIĘ PONIEŚĆ.",
+    "ZAŻÓŁĆ GĘŚLĄ JAŹŃ",
+    "1 690 ZŁ / DZIEŃ",
+    "0-100 KM/H W 2,8 S",
+  ];
+  for (const box of document.querySelectorAll("[data-headlines]")) {
+    for (const text of HEADLINES) {
+      const line = document.createElement("div");
+      line.textContent = text;
+      box.append(line);
+    }
+  }
+
+  const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZĄĆĘŁŃÓŚŹŻ0123456789.,:;-–/!?%+&'\"()#@*·×°";
+  const grid = document.getElementById("grid");
+  for (const ch of CHARS) {
+    const cell = document.createElement("div");
+    cell.className = "cell";
+    const glyph = document.createElement("div");
+    glyph.className = "display";
+    glyph.textContent = ch;
+    const label = document.createElement("small");
+    label.textContent = "U+" + ch.codePointAt(0).toString(16).toUpperCase().padStart(4, "0");
+    cell.append(glyph, label);
+    grid.append(cell);
+  }
+</script>
+</body>
+</html>
