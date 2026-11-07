@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Renderuje podglądy PNG przez Chrome bez okna (headless).
 
-preview/specimen.png      - cały specimen.html
+preview/specimen.png      - cały specimen.html (Ave Display)
+preview/text-specimen.png - cały specimen-text.html (Ave Text)
 preview/banner.png        - napis AVEJA i podpis Filip Piątek w dużym rozmiarze
 """
 
@@ -70,5 +71,14 @@ def render_all(root: Path = ROOT) -> None:
     print(f"podglądy: {specimen_png.relative_to(root)}, {(preview / 'banner.png').relative_to(root)}")
 
 
+def render_text(root: Path = ROOT) -> None:
+    """preview/text-specimen.png: cały specimen-text.html (rodzina Ave Text)."""
+    png = root / "preview" / "text-specimen.png"
+    screenshot(root / "specimen-text.html", png, 1600, 9000)
+    trim_bottom(png, margin=56)
+    print(f"podgląd: {png.relative_to(root)}")
+
+
 if __name__ == "__main__":
     render_all(Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT)
+    render_text(Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT)

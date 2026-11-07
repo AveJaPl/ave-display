@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ave Text - specimen</title>
+<style>
+  @font-face { font-family: "Ave Text"; src: url("dist/AveText-Regular.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: block; }
+  @font-face { font-family: "Ave Text"; src: url("dist/AveText-Italic.woff2") format("woff2"); font-weight: 400; font-style: italic; font-display: block; }
+  @font-face { font-family: "Ave Text"; src: url("dist/AveText-Bold.woff2") format("woff2"); font-weight: 700; font-style: normal; font-display: block; }
+  @font-face { font-family: "Ave Text"; src: url("dist/AveText-BoldItalic.woff2") format("woff2"); font-weight: 700; font-style: italic; font-display: block; }
+  @font-face { font-family: "Ave Display"; src: url("dist/AveDisplay-Regular.woff2") format("woff2"); font-weight: 400; font-display: block; }
+
+  :root {
+    --bg: #070708; --card: #0d0d10; --fg: #ffffff; --text: #d9d9de; --muted: #8a8a93;
+    --line: #1d1d22; --accent: #e10600; --paper: #f4f4f1; --ink: #141416;
+    --mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: "Ave Text", sans-serif; font-synthesis: none;
+         -webkit-font-smoothing: antialiased; }
+  main { max-width: 1600px; margin: 0 auto; padding: 56px 40px 72px; }
+  .display { font-family: "Ave Display", sans-serif; font-weight: 400; line-height: 1.08; }
+  header { display: grid; gap: 18px; padding-bottom: 40px; border-bottom: 1px solid var(--line); }
+  header .display { font-size: 140px; }
+  header .lead { font-size: 28px; line-height: 1.35; color: var(--text); max-width: 1100px; margin: 0; }
+  .meta { display: flex; flex-wrap: wrap; gap: 10px 28px; color: var(--muted); font-size: 15px; }
+  .meta b { color: var(--fg); }
+  section { padding: 44px 0 12px; border-bottom: 1px solid var(--line); }
+  h2 { margin: 0 0 26px; font: 600 13px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+  small.l { display: block; font: 12px/1.4 var(--mono); color: var(--muted); margin-bottom: 8px; }
+
+  .styles { display: grid; gap: 6px; font-size: 64px; line-height: 1.15; padding-bottom: 32px; }
+  .styles span { font: 13px var(--mono); color: var(--muted); margin-left: 18px; vertical-align: middle; }
+  .waterfall { display: grid; grid-template-columns: 1fr 1fr 1.1fr 1.35fr; gap: 34px; align-items: start; padding-bottom: 36px; }
+  .waterfall p { margin: 0; line-height: 1.6; color: var(--text); }
+
+  .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-bottom: 36px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 30px 34px; }
+  .card.light { background: var(--paper); color: var(--ink); border-color: #ddd; }
+  .card .display { font-size: 56px; margin-bottom: 14px; }
+  .card h3 { font-size: 28px; font-weight: 700; margin: 0 0 10px; }
+  .card p { font-size: 17px; line-height: 1.62; margin: 0 0 14px; color: inherit; opacity: .92; }
+  .btn { display: inline-block; margin-top: 6px; padding: 12px 22px; border-radius: 4px; background: var(--accent); color: #fff;
+         font-weight: 700; letter-spacing: .02em; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); border-top: 1px solid var(--line);
+          border-left: 1px solid var(--line); margin-bottom: 36px; }
+  .cell { display: grid; place-items: center; height: 84px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+          font-size: 44px; }
+  .figures { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding-bottom: 36px; font-size: 30px; line-height: 1.4; }
+  .tnum { font-feature-settings: "tnum"; }
+  .figures .col { text-align: right; max-width: 380px; }
+  pre { margin: 0 0 36px; padding: 22px 24px; background: #0e0e11; border: 1px solid var(--line); border-radius: 6px;
+        color: #d6d6dc; font: 13px/1.6 var(--mono); overflow-x: auto; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="display">AVE TEXT</div>
+    <p class="lead">Krój do akapitów w parze z Ave Display: kanciaste brzuszki, końcówki cięte pod kątem nagłówków,
+      luźny, techniczny rytm. Cztery style, pełne znaki polskie i środkowo- oraz zachodnioeuropejskie.</p>
+    <div class="meta">
+      <span><b>Regular · Italic · Bold · Bold Italic</b></span>
+      <span>wersaliki 700 / wysokość x 510 / linia 950 −250</span>
+      <span>kursywa 10°, jednopiętrowe <i>a</i> i <i>f</i> z ogonkiem</span>
+      <span>Windows-1250 + 1252, cyfry tabelaryczne (tnum), kerning, hinting</span>
+      <span>projekt: Filip Piątek (AveJa)</span>
+    </div>
+  </header>
+
+  <section>
+    <h2>Style</h2>
+    <div class="styles">
+      <div>Rezerwacja online, 24/7 <span>Regular</span></div>
+      <div><i>Rezerwacja online, 24/7</i> <span>Italic</span></div>
+      <div><b>Rezerwacja online, 24/7</b> <span>Bold</span></div>
+      <div><b><i>Rezerwacja online, 24/7</i></b> <span>Bold Italic</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Akapit: 14 / 16 / 18 / 24 px</h2>
+    <div class="waterfall" id="waterfall"></div>
+  </section>
+
+  <section>
+    <h2>W parze z Ave Display</h2>
+    <div class="pair">
+      <div class="card">
+        <div class="display">WYBIERZ MASZYNĘ</div>
+        <h3>Gotowa do drogi w 15 minut</h3>
+        <p>Każde auto z naszej floty przechodzi przegląd przed wydaniem: sprawdzamy hamulce, opony i elektronikę,
+          zanim oddamy Ci kluczyki. <b>Rezerwację potwierdzisz w dwie minuty</b>, a w cenie masz pełne ubezpieczenie
+          i 300 km dziennie. <i>Bez ukrytych opłat i bez kaucji przy wynajmie na weekend.</i></p>
+        <span class="btn">Zarezerwuj termin</span>
+      </div>
+      <div class="card light">
+        <div class="display">DAJ SIĘ PONIEŚĆ.</div>
+        <h3>„Yeti” na zimę, Porsche na lato</h3>
+        <p>Odbiór: ul. Żwirki i Wigury 16, Warszawa. <b>0–100 km/h w 2,8 s</b>, 1 690 zł / dzień, kaucja 0 zł.
+          Pytania? Zadzwoń: +48 600 123 456 albo napisz na kontakt@redline.pl. <i>Zażółć gęślą jaźń.</i></p>
+        <span class="btn">Sprawdź dostępność</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cyfry proporcjonalne i tabelaryczne (tnum)</h2>
+    <div class="figures">
+      <div class="col"><small class="l">domyślne (proporcjonalne)</small>111 111,11 zł<br>989 806,58 zł<br>14 714,17 zł</div>
+      <div class="col tnum"><small class="l">font-feature-settings: "tnum"</small>111 111,11 zł<br>989 806,58 zł<br>14 714,17 zł</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Zestaw znaków (Regular)</h2>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section>
+    <h2>Użycie na stronie</h2>
+<pre>@font-face { font-family: "Ave Text"; src: url("/fonts/AveText-Regular.woff2") format("woff2");
+             font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Ave Text"; src: url("/fonts/AveText-Italic.woff2") format("woff2");
+             font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: "Ave Text"; src: url("/fonts/AveText-Bold.woff2") format("woff2");
+             font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Ave Text"; src: url("/fonts/AveText-BoldItalic.woff2") format("woff2");
+             font-weight: 700; font-style: italic; font-display: swap; }
+
+body { font-family: "Ave Text", sans-serif; }
+h1, h2 { font-family: "Ave Display", sans-serif; font-weight: 400; font-synthesis: none; }
+.cena { font-feature-settings: "tnum"; }   /* równe kolumny liczb */</pre>
+  </section>
+</main>
+<script>
+  const PARAGRAPH = "Każde auto z naszej floty przechodzi przegląd przed wydaniem: sprawdzamy hamulce, opony i elektronikę, zanim oddamy Ci kluczyki. Rezerwację potwierdzisz w dwie minuty, a w cenie masz pełne ubezpieczenie i 300 km dziennie. Bez ukrytych opłat i bez kaucji przy wynajmie na weekend, nawet jeśli wybierzesz najmocniejszy model.";
+  const wf = document.getElementById("waterfall");
+  for (const size of [14, 16, 18, 24]) {
+    const col = document.createElement("div");
+    col.innerHTML = `<small class="l">${size} px</small>`;
+    const p = document.createElement("p");
+    p.style.fontSize = size + "px";
+    p.textContent = PARAGRAPH;
+    col.append(p);
+    wf.append(col);
+  }
+  const CHARS = "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿĂăĄąĆćČčĎďĐđĘęĚěıĹĺĽľŁłŃńŇňŐőŒœŔŕŘřŚśŞşŠšŢţŤťŮůŰűŸŹźŻżŽžƒˆˇ˘˙˚˛˜˝–—‘’‚“”„†‡•…‰‹›€™−";
+  const grid = document.getElementById("grid");
+  for (const ch of CHARS) {
+    const cell = document.createElement("div");
+    cell.className = "cell";
+    cell.textContent = ch;
+    grid.append(cell);
+  }
+</script>
+</body>
+</html>

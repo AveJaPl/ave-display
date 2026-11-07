@@ -8,10 +8,9 @@ from pathlib import Path
 
 from fontTools.fontBuilder import FontBuilder
 from fontTools.misc.roundTools import otRound
-from fontTools.pens.cu2quPen import Cu2QuPen
-from fontTools.pens.roundingPen import RoundingPen
-from fontTools.pens.ttGlyphPen import TTGlyphPen
-from fontTools.ttLib import TTFont, newTable
+
+from ave_core.fontio import gasp_smooth_all, save_ttf_and_woff2, to_tt_glyph
+from ave_core.meta import COPYRIGHT, LICENSE, OWNER, RELEASE_EPOCH
 
 from . import glyphs
 from .geometry import Shape
@@ -23,13 +22,6 @@ FAMILY = "Ave Display"
 STYLE = "Regular"
 PS_NAME = "AveDisplay-Regular"
 VERSION = "1.000"
-RELEASE_EPOCH = 1793923200
-OWNER = "Filip Piątek"
-COPYRIGHT = f"Copyright (c) 2026 {OWNER} (AveJa). Wszelkie prawa zastrzeżone."
-LICENSE = (
-    "Font jest własnością Filipa Piątka. Wszelkie prawa zastrzeżone. "
-    "Kopiowanie, rozpowszechnianie i modyfikowanie bez pisemnej zgody właściciela jest zabronione."
-)
 
 EXTRA_CMAP = {0x00A0: "space"}
 
@@ -61,12 +53,6 @@ def build_glyphs() -> list[BuiltGlyph]:
     return [BuiltGlyph(name, *_final_shape(spec, cache)) for name, spec in REGISTRY.items()]
 
 
-def _to_tt_glyph(shape: Shape):
-    pen = TTGlyphPen(None)
-    shape.draw(Cu2QuPen(RoundingPen(pen), max_err=0.4, reverse_direction=True))
-    return pen.glyph()
-
-
 def _cmap() -> dict[int, str]:
     cmap: dict[int, str] = {}
     for name, spec in REGISTRY.items():
@@ -96,7 +82,7 @@ def build_font(out_dir: Path) -> tuple[Path, Path]:
     fb = FontBuilder(UPM, isTTF=True)
     fb.setupGlyphOrder(order)
     fb.setupCharacterMap(_cmap())
-    fb.setupGlyf({g.name: _to_tt_glyph(g.shape) for g in built})
+    fb.setupGlyf({g.name: to_tt_glyph(g.shape) for g in built})
 
     glyf = fb.font["glyf"]
     metrics = {}
@@ -153,22 +139,12 @@ def build_font(out_dir: Path) -> tuple[Path, Path]:
     fb.setupPost(italicAngle=-SLANT_DEG, underlinePosition=-130, underlineThickness=70)
     fb.addOpenTypeFeatures(_kerning_feature())
 
-    gasp = newTable("gasp")
-    gasp.version = 1
-    gasp.gaspRange = {0xFFFF: 0x000F}
-    fb.font["gasp"] = gasp
+    fb.font["gasp"] = gasp_smooth_all()
 
     fb.font["OS/2"].recalcUnicodeRanges(fb.font)
     fb.font["head"].fontRevision = float(VERSION)
 
-    ttf_path = out_dir / f"{PS_NAME}.ttf"
-    woff2_path = out_dir / f"{PS_NAME}.woff2"
-    fb.save(str(ttf_path))
-
-    web = TTFont(str(ttf_path))
-    web.flavor = "woff2"
-    web.save(str(woff2_path))
-    return ttf_path, woff2_path
+    return save_ttf_and_woff2(fb, out_dir, PS_NAME)
 
 
 __all__ = ["build_font", "build_glyphs", "glyphs"]
